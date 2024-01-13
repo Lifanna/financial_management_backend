@@ -18,7 +18,7 @@ class CategoryListAPIView(generics.ListAPIView):
 
 
 class RevenueCreateAPIView(generics.CreateAPIView):
-    serializer_class = serializers.RevenueSerializer
+    serializer_class = serializers.RevenueCreateUpdateSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -38,7 +38,7 @@ class RevenueListAPIView(generics.ListAPIView):
 
 
 class RevenueUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = serializers.RevenueSerializer
+    serializer_class = serializers.RevenueCreateUpdateSerializer
     queryset = models.Revenue.objects.all()
 
     permission_classes = [IsAuthenticated]
@@ -83,3 +83,10 @@ class ExpenditureDeleteAPIView(generics.DestroyAPIView):
     queryset = models.Expenditure.objects.all()
 
     permission_classes = [IsAuthenticated]
+
+
+class RevenueRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = serializers.RevenueSerializer  # Используйте ваш сериализатор RevenueSerializer
+    queryset = models.Revenue.objects.all()  # Получите все объекты Revenue
+
+    permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated

@@ -38,6 +38,15 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class RevenueSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(
+
+    )
+    class Meta:
+        model = models.Revenue
+        fields = '__all__'
+
+
+class RevenueCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Revenue
         fields = '__all__'

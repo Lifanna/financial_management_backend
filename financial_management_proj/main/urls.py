@@ -31,7 +31,8 @@ urlpatterns = [
     # revenue
     path("revenue", views.RevenueListAPIView.as_view(), name="list-revenue"),
     path("revenue/new", views.RevenueCreateAPIView.as_view(), name="create-revenue"),
-    path("revenue/<int:pk>", views.RevenueUpdateAPIView.as_view(), name="update-revenue"),
+    path("revenue/update/<int:pk>", views.RevenueUpdateAPIView.as_view(), name="update-revenue"),
+    path("revenue/<int:pk>", views.RevenueRetrieveAPIView.as_view(), name="index-revenue"),
     path("revenue/delete/<int:pk>", views.RevenueDeleteAPIView.as_view(), name="delete-revenue"),
 
     # expenditure
