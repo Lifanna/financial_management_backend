@@ -16,7 +16,7 @@ import environ, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 env=environ.Env()
-ENV_DIR = Path(__file__).resolve().parent.parent.parent
+ENV_DIR = Path(__file__).resolve().parent.parent
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,17 +91,16 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'financial_management_proj.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASS'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
+        'NAME': 'kivanovape',
+        'USER': 'kivanovape',
+        'PASSWORD': 'fRZ7XNZVKSG*R7NP',
+        'HOST': 'pg3.sweb.ru',
+        'PORT': '5432',
     }
 }
 
