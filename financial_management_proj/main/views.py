@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from . import serializers, models, permissions
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import views
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -90,3 +91,11 @@ class RevenueRetrieveAPIView(generics.RetrieveAPIView):
     queryset = models.Revenue.objects.all()  # Получите все объекты Revenue
 
     permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated
+
+
+class ReportRevenueAPIView(views.APIView):
+    pass
+
+
+class ReportExpenditureAPIView(views.APIView):
+    pass

@@ -40,4 +40,8 @@ urlpatterns = [
     path("expenditure/new", views.ExpenditureCreateAPIView.as_view(), name="create-expenditure"),
     path("expenditure/<int:pk>", views.ExpenditureUpdateAPIView.as_view(), name="update-expenditure"),
     path("expenditure/delete/<int:pk>", views.ExpenditureDeleteAPIView.as_view(), name="delete-expenditure"),
+
+    # report
+    path("reports/revenue", views.ReportRevenueAPIView.as_view(), name="report-revenue"),
+    path("reports/expenditure", views.ReportExpenditureAPIView.as_view(), name="report-expenditure"),
 ]
