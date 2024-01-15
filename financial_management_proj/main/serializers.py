@@ -38,9 +38,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class RevenueSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(
-
-    )
+    category = CategorySerializer()
     class Meta:
         model = models.Revenue
         fields = '__all__'
@@ -52,7 +50,15 @@ class RevenueCreateUpdateSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ExpenditureCreateUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Expenditure
+        fields = '__all__'
+
+
 class ExpenditureSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
     class Meta:
         model = models.Expenditure
         fields = '__all__'

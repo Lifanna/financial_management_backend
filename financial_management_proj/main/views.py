@@ -52,7 +52,7 @@ class RevenueDeleteAPIView(generics.DestroyAPIView):
 
 
 class ExpenditureCreateAPIView(generics.CreateAPIView):
-    serializer_class = serializers.ExpenditureSerializer
+    serializer_class = serializers.ExpenditureCreateUpdateSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -72,7 +72,7 @@ class ExpenditureListAPIView(generics.ListAPIView):
 
 
 class ExpenditureUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = serializers.ExpenditureSerializer
+    serializer_class = serializers.ExpenditureCreateUpdateSerializer
     queryset = models.Expenditure.objects.all()
 
     permission_classes = [IsAuthenticated]
@@ -88,5 +88,12 @@ class ExpenditureDeleteAPIView(generics.DestroyAPIView):
 class RevenueRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = serializers.RevenueSerializer  # Используйте ваш сериализатор RevenueSerializer
     queryset = models.Revenue.objects.all()  # Получите все объекты Revenue
+
+    permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated
+
+
+class ExpenditureRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = serializers.ExpenditureSerializer  # Используйте ваш сериализатор RevenueSerializer
+    queryset = models.Expenditure.objects.all()  # Получите все объекты Revenue
 
     permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated

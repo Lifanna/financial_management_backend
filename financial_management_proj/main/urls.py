@@ -38,6 +38,7 @@ urlpatterns = [
     # expenditure
     path("expenditure", views.ExpenditureListAPIView.as_view(), name="list-expenditure"),
     path("expenditure/new", views.ExpenditureCreateAPIView.as_view(), name="create-expenditure"),
-    path("expenditure/<int:pk>", views.ExpenditureUpdateAPIView.as_view(), name="update-expenditure"),
+    path("expenditure/update/<int:pk>", views.ExpenditureUpdateAPIView.as_view(), name="update-expenditure"),
+    path("expenditure/<int:pk>", views.ExpenditureRetrieveAPIView.as_view(), name="retrieve-expenditure"),
     path("expenditure/delete/<int:pk>", views.ExpenditureDeleteAPIView.as_view(), name="delete-expenditure"),
 ]
