@@ -1,0 +1,1 @@
+web: gunicorn financial_management_proj.wsgi
