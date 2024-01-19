@@ -62,3 +62,14 @@ class ExpenditureSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Expenditure
         fields = '__all__'
+
+class ReportRevenueSerializer(serializers.Serializer):
+    category_id = serializers.IntegerField()
+    category_name = serializers.CharField(source='category__name')
+    total_sum = serializers.DecimalField(max_digits=10, decimal_places=2, coerce_to_string=True)
+
+
+class ReportExpenditureSerializer(serializers.Serializer):
+    category_id = serializers.IntegerField()
+    category_name = serializers.CharField(source='category__name')
+    total_sum = serializers.DecimalField(max_digits=10, decimal_places=2, coerce_to_string=True)

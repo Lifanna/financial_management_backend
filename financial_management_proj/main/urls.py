@@ -41,4 +41,8 @@ urlpatterns = [
     path("expenditure/update/<int:pk>", views.ExpenditureUpdateAPIView.as_view(), name="update-expenditure"),
     path("expenditure/<int:pk>", views.ExpenditureRetrieveAPIView.as_view(), name="retrieve-expenditure"),
     path("expenditure/delete/<int:pk>", views.ExpenditureDeleteAPIView.as_view(), name="delete-expenditure"),
+
+    # report
+    path("reports/revenue", views.reportRevenue_API_view, name="report-revenue"),
+    path("reports/expenditure", views.reportExpenditure_API_view, name="report-expenditure"),
 ]

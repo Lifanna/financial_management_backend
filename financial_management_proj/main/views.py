@@ -1,7 +1,13 @@
+import datetime
 from django.shortcuts import render
 from rest_framework import generics
 from . import serializers, models, permissions
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import views
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.db.models import Sum
+from rest_framework import status
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -84,6 +90,12 @@ class ExpenditureDeleteAPIView(generics.DestroyAPIView):
 
     permission_classes = [IsAuthenticated]
 
+class ExpenditureRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = serializers.ExpenditureSerializer  # Используйте ваш сериализатор RevenueSerializer
+    queryset = models.Expenditure.objects.all()  # Получите все объекты Revenue
+
+    permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated
+
 
 class RevenueRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = serializers.RevenueSerializer  # Используйте ваш сериализатор RevenueSerializer
@@ -92,8 +104,44 @@ class RevenueRetrieveAPIView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated
 
 
-class ExpenditureRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = serializers.ExpenditureSerializer  # Используйте ваш сериализатор RevenueSerializer
-    queryset = models.Expenditure.objects.all()  # Получите все объекты Revenue
+# class ReportRevenueAPIView(views.APIView):
+    # pass
 
-    permission_classes = [IsAuthenticated]  # Установите нужные разрешения, включая IsAuthenticated
+
+# class ReportExpenditureAPIView(views.APIView):
+#     pass
+
+@api_view(['POST', ])
+def reportRevenue_API_view(request):
+    start_date_str = request.data.get('start_date')
+    end_date_str = request.data.get('end_date')
+    print(start_date_str,end_date_str)
+    revenues = models.Revenue.objects.filter(
+    user=request.user,
+    revenue_date__range=(start_date_str, end_date_str)
+    ).values('category_id', 'category__name').annotate(
+    total_sum=Sum('sum')
+    ).order_by('category_id')
+    serializer = serializers.ReportRevenueSerializer(revenues, many=True)
+    serialized_data = serializer.data
+
+    return Response(serialized_data)
+
+
+@api_view(['POST', ])
+def reportExpenditure_API_view(request):
+    start_date_str = request.data.get('start_date')
+    end_date_str = request.data.get('end_date')
+    print(start_date_str,end_date_str)
+    revenues = models.Expenditure.objects.filter(
+    user=request.user,
+    expenditure_date__range=(start_date_str, end_date_str)
+    ).values('category_id', 'category__name').annotate(
+    total_sum=Sum('sum')
+    ).order_by('category_id')
+    serializer = serializers.ReportExpenditureSerializer(revenues, many=True)
+    serialized_data = serializer.data
+
+    return Response(serialized_data)
+
+
